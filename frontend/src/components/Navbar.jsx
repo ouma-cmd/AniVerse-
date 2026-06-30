@@ -1,71 +1,111 @@
-import { Link, NavLink } from "react-router-dom";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  const linkClass = ({ isActive }) =>
+    isActive
+      ? "text-purple-500 font-medium uppercase text-[13px]"
+      : "text-white font-medium uppercase text-[13px] hover:text-purple-500 transition";
+
   return (
-    <div className="flex justify-between items-center bg-black px-[60px] py-[20px] border-b border-[#1a1a1a]">
-      <h1 className="text-[22px] font-bold text-white m-0">AniVerse</h1>
-      <nav className="flex gap-[30px] items-center">
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive
-              ? "text-purple-500 no-underline text-[13px] font-medium tracking-[0.5px] uppercase"
-              : "text-white no-underline text-[13px] font-medium tracking-[0.5px] uppercase"
-          }
+    <header className="bg-black border-b border-[#1a1a1a]">
+      <div className="max-w-7xl mx-auto flex justify-between items-center md:px-12 py-5">
+        {/* Logo */}
+        <h1 className="text-2xl font-bold text-white">
+          AniVerse
+        </h1>
+
+        {/* Desktop Menu */}
+        <nav className="hidden md:flex items-center gap-8">
+          <NavLink to="/" className={linkClass}>
+            Home
+          </NavLink>
+
+          <NavLink to="/anime" className={linkClass}>
+            Anime
+          </NavLink>
+
+          <NavLink to="/characters" className={linkClass}>
+            Characters
+          </NavLink>
+
+          <NavLink to="/favorites" className={linkClass}>
+            Favorites
+          </NavLink>
+
+          <NavLink to="/my-library" className={linkClass}>
+            My Library
+          </NavLink>
+
+          <NavLink to="/dashboard" className={linkClass}>
+            Dashboard
+          </NavLink>
+        </nav>
+
+        {/* Mobile Button */}
+        <button
+          className="md:hidden text-white"
+          onClick={() => setOpen(!open)}
         >
-          HOME
-        </NavLink>
-        <NavLink
-          to="/anime"
-          className={({ isActive }) =>
-            isActive
-              ? "text-purple-500 no-underline text-[13px] font-medium tracking-[0.5px] uppercase"
-              : "text-white no-underline text-[13px] font-medium tracking-[0.5px] uppercase"
-          }
-        >
-          Anime
-        </NavLink>
-        <NavLink
-          to="/characters"
-          className={({ isActive }) =>
-            isActive
-              ? "text-purple-500 no-underline text-[13px] font-medium tracking-[0.5px] uppercase"
-              : "text-white no-underline text-[13px] font-medium tracking-[0.5px] uppercase"
-          }
-        >
-          Characters
-        </NavLink>
-        <NavLink
-          to="/favorites"
-          className={({ isActive }) =>
-            isActive
-              ? "text-purple-500 no-underline text-[13px] font-medium tracking-[0.5px] uppercase"
-              : "text-white no-underline text-[13px] font-medium tracking-[0.5px] uppercase"
-          }
-        >
-          Favorites
-        </NavLink>
-        <NavLink
-          to="/my-library"
-          className={({ isActive }) =>
-            isActive
-              ? "text-purple-500 no-underline text-[13px] font-medium tracking-[0.5px] uppercase"
-              : "text-white no-underline text-[13px] font-medium tracking-[0.5px] uppercase"
-          }
-        >
-          My Library
-        </NavLink>
-        <NavLink
-          to="/dashboard"
-          className={({ isActive }) =>
-            isActive
-              ? "text-purple-500 no-underline text-[13px] font-medium tracking-[0.5px] uppercase"
-              : "text-white no-underline text-[13px] font-medium tracking-[0.5px] uppercase"
-          }
-        >
-          Dashboard
-        </NavLink>
-      </nav>
-    </div>
+          {open ? <X size={30} /> : <Menu size={30} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {open && (
+        <nav className="md:hidden bg-black border-t border-[#1a1a1a] flex flex-col items-center gap-6 py-6">
+          <NavLink
+            to="/"
+            className={linkClass}
+            onClick={() => setOpen(false)}
+          >
+            Home
+          </NavLink>
+
+          <NavLink
+            to="/anime"
+            className={linkClass}
+            onClick={() => setOpen(false)}
+          >
+            Anime
+          </NavLink>
+
+          <NavLink
+            to="/characters"
+            className={linkClass}
+            onClick={() => setOpen(false)}
+          >
+            Characters
+          </NavLink>
+
+          <NavLink
+            to="/favorites"
+            className={linkClass}
+            onClick={() => setOpen(false)}
+          >
+            Favorites
+          </NavLink>
+
+          <NavLink
+            to="/my-library"
+            className={linkClass}
+            onClick={() => setOpen(false)}
+          >
+            My Library
+          </NavLink>
+
+          <NavLink
+            to="/dashboard"
+            className={linkClass}
+            onClick={() => setOpen(false)}
+          >
+            Dashboard
+          </NavLink>
+        </nav>
+      )}
+    </header>
   );
 }
