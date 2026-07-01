@@ -13,8 +13,14 @@ export default function AnimeDetails() {
     let library = JSON.parse(localStorage.getItem("library")) || [];
 
     if (!library.find((item) => item.mal_id === anime.mal_id)) {
-      library.push(anime);
-      localStorage.setItem("MyLibrary", JSON.stringify(library));
+      library.push({
+        ...anime,
+        watched: 0,
+        status: "Watching",
+      });
+
+      localStorage.setItem("library", JSON.stringify(library));
+
       alert("Added to Library");
     }
   };
