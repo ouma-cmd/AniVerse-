@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Home from "./components/pages/Home";
-import AnimeList from "./components/pages/AnimeList";
-import Dashboard from "./components/pages/Dashboard";
-import Characters from "./components/pages/Characters";
-import Favorites from "./components/pages/Favorites";
-import MyLibrary from "./components/pages/MyLibrary";
+import Home from "./pages/Home";
+import AnimeList from "./pages/AnimeList";
+import Dashboard from "./pages/Dashboard";
+import Characters from "./pages/Characters";
+import Favorites from "./pages/Favorites";
+import MyLibrary from "./pages/MyLibrary";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="my-library" element={<MyLibrary />} />
         <Route path="dashboard" element={<Dashboard />} />
       </Routes>
+      <Footer/>
     </div>
   );
 }
